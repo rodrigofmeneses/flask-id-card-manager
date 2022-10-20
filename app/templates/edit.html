@@ -5,12 +5,12 @@
         <input type="hidden" name="id" value="{{ id }}">
         {{ form.csrf_token() }}
         <div class="form-group inputBox">
-            {{ form.name.label(class='form-label') }}
-            {{ form.name(class='form-control') }}
-        </div>
-        <div class="form-group inputBox">
             {{ form.id.label(class='form-label') }}
             {{ form.id(class='form-control') }}
+        </div>
+        <div class="form-group inputBox">
+            {{ form.name.label(class='form-label') }}
+            {{ form.name(class='form-control') }}
         </div>
         <div class="form-group buttons">
             {{ form.save(class='btn btn-primary') }}

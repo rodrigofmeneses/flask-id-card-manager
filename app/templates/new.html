@@ -1,5 +1,6 @@
 {% extends "template.html" %}
 {% block content %}
+<h1>{{ title }}</h1>
 <form action="{{ url_for('employees.create') }}" method="POST" enctype="multipart/form-data">
     <fieldset>
         {{ form.csrf_token() }}

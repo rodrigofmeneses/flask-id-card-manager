@@ -17,11 +17,11 @@ def client():
         db.session.remove()
 
 @fixture()
-def new_employees():
-    employees = [
+def employees():
+    new_employees = [
         Employee(name='Rodrigo', id='123456'), Employee(name='Marta', id='654321')
     ]
-    db.session.bulk_save_objects(employees)
+    db.session.bulk_save_objects(new_employees)
     db.session.commit()
     yield employees
     for employee in Employee.query.all():

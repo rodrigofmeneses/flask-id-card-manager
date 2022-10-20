@@ -25,19 +25,19 @@ def new():
 def create():
     form = EmployeeForm(request.form)
     if not form.validate_on_submit():
-        return redirect('employees.new')
+        return redirect(url_for('employees.new'))
     id = form.id.data
     name = form.name.data
     try:
         employee = Employee(id=id, name=name)
     except:
         flash('Employee already exist!')
-        return redirect('home.index')
+        return redirect(url_for('home.index'))
     db.session.add(employee)
     db.session.commit()
-    return redirect('home.index')
+    return redirect(url_for('home.index'))
 
-@employees.get('/employees/<int:id>/edit')
+@employees.get('/employees/<id>/edit')
 def edit(id):
     employee = Employee.query.filter_by(id=id).first()
     form = EmployeeForm()
@@ -47,8 +47,19 @@ def edit(id):
 
 @employees.post('/employees/<id>/update')
 def update(id):
-    return redirect('home.index')
+    form = EmployeeForm(request.form)
+    if form.validate_on_submit():
+        employee = Employee.query.filter_by(id=form.id.data).first()
+        employee.name = form.name.data
+        employee.id = form.id.data
 
-@employees.delete('/employees/<id>/delete')
+        db.session.add(employee)
+        db.session.commit()
+
+    return redirect(url_for('home.index'))
+
+@employees.route('/employees/<id>/delete')
 def delete(id):
-    return redirect('home.index')
+    Employee.query.filter_by(id=id).delete()
+    db.session.commit()
+    return redirect(url_for('home.index'))
