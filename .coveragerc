@@ -1,0 +1,9 @@
+[run]
+source = ./app
+omit = 
+    ./app/ext/__init__.py
+
+
+[report]
+exclude_lines = 
+    def __str__

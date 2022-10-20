@@ -1,0 +1,21 @@
+{% extends "template.html" %}
+{% block content %}
+<form action="{{ url_for('employees.update', id=id) }}" method="POST" enctype="multipart/form-data">
+    <fieldset>
+        <input type="hidden" name="id" value="{{ id }}">
+        {{ form.csrf_token() }}
+        <div class="form-group inputBox">
+            {{ form.name.label(class='form-label') }}
+            {{ form.name(class='form-control') }}
+        </div>
+        <div class="form-group inputBox">
+            {{ form.id.label(class='form-label') }}
+            {{ form.id(class='form-control') }}
+        </div>
+        <div class="form-group buttons">
+            {{ form.save(class='btn btn-primary') }}
+            <a class="btn btn-danger" href="{{ url_for('home.index') }}">Back</a>
+        </div>
+    </fieldset>
+</form>
+{% endblock %}
