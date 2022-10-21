@@ -30,20 +30,30 @@ class TestRead:
 
 
 class TestUpdate:
-    def test_when_user_edit_a_employee_main_page_must_reflect_that_change(self, browser, employees):
+    def test_edit_employee_main_page_must_reflect_that_change(self, browser, employees):
         browser.visit(url_for('home.index'))
 
         assert browser.is_text_present('Rodrigo')
         assert browser.is_text_present('123456') 
 
         browser.links.find_by_text('Edit').click()
+        assert browser.url == url_for('employees.edit', id=123456)
         browser.fill('name', 'Meneses')
         browser.fill('id', '111111')
         browser.find_by_value('Save').click()
 
+        assert browser.url == url_for('home.index')
         assert browser.is_text_present('Meneses')
         assert browser.is_text_present('111111') 
 
 
-# class TestDelete:
-#     ...
+class TestDelete:
+    def test_delete_employee_main_page_must_reflect_that_change(self, browser, employees):
+        browser.visit(url_for('home.index'))
+
+        assert browser.is_text_present('Rodrigo')
+        assert browser.is_text_present('123456') 
+
+        browser.links.find_by_text('Delete').click()
+        assert browser.is_text_present('Rodrigo') == False
+        assert browser.is_text_present('123456') == False
