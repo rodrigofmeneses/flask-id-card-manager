@@ -1,8 +1,9 @@
 {% extends "template.html" %}
 {% block content %}
+<h1>{{ title }}</h1>
 <form action="{{ url_for('employees.update', id=id) }}" method="POST" enctype="multipart/form-data">
     <fieldset>
-        <input type="hidden" name="id" value="{{ id }}">
+        <input type="hidden" name="current_id" value="{{ id }}">
         {{ form.csrf_token() }}
         <div class="form-group inputBox">
             {{ form.id.label(class='form-label') }}

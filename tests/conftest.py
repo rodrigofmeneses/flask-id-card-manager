@@ -31,8 +31,3 @@ def employees():
     for employee in Employee.query.all():
         db.session.delete(employee)
     db.session.commit()
-
-@fixture(scope='module')
-def employee():
-    employee = Employee(name='Rodrigo', id=376176)
-    return employee

@@ -1,11 +1,11 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, validators
+from wtforms import StringField, IntegerField, SubmitField, validators
 
 
 class EmployeeForm(FlaskForm):
-    id = StringField(
+    id = IntegerField(
         'ID', 
-        [validators.DataRequired(), validators.length(min=1, max=6)]
+        [validators.DataRequired()]
     )
     name = StringField(
         'Name',
