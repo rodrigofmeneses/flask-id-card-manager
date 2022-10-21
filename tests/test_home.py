@@ -1,29 +1,21 @@
-def test_home_page_when_GET_then_response_correctly(client):
+from flask import url_for
+
+
+def test_when_acess_home_page_then_page_must_be_online(browser):
     '''
     GIVEN a Flask application configured for testing
     WHEN the "/" page is requested (GET)
     THEN check that the response is valid
     '''
-    response = client.get('/')
-    assert response.status_code == 200
-    assert b'ID Card Manager' in response.data
+    browser.visit(url_for('home.index'))
+    assert browser.is_text_present('ID Card Manager')
 
-def test_home_page_when_POST_then_response_correctly(client):
-    '''
-    GIVEN a Flask application configured for testing
-    WHEN the '/' page is posted to (POST)
-    THEN check that a "405" status code is returned
-    '''
-    response = client.post('/')
-    assert response.status_code == 405
-    assert b'ID Card Manager' not in response.data
+def test_when_acess_home_page_then_page_must_be_a_list_of_new_employees(browser, employees):
+    browser.visit(url_for('home.index'))
+    assert browser.is_text_present('Rodrigo')
+    assert browser.is_text_present('Marta')
 
-def test_when_acess_home_page_is_visible_a_list_of_employees(client, employees):
-    response = client.get('/')
-    assert b'Rodrigo' in response.data
-    assert b'Marta' in response.data
-
-def test_each_employee_has_edit_and_delete_buttons(client, employees):
-    response = client.get('/')
-    assert b'123456/edit">Edit' in response.data
-    assert b'123456/delete">Delete' in response.data
+def test_when_acess_home_page_with_no_employees_registered_must_see_a_message(browser):
+    browser.visit(url_for('home.index'))
+    assert browser.is_text_present('ID Card Manager')
+    assert browser.is_text_present('No registered employees')

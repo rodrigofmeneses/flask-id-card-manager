@@ -1,29 +1,38 @@
 from app import create_app
 from app.ext.database import db
 from app.models import Employee
-from pytest import fixture
 from dotenv import load_dotenv
+from pytest import fixture
+from splinter import Browser
 
 
 load_dotenv('.env.test')
 
-@fixture(scope='module')
-def client():
+@fixture(scope='class')
+def browser():
     app = create_app(FORCE_ENV_FOR_DYNACONF="testing")
-    with app.app_context():
+    context = app.test_request_context()
+    context.push()
+    with app.test_client():
         db.create_all()
-        yield app.test_client()
+        yield Browser('flask', app=app)
         db.drop_all()
         db.session.remove()
 
 @fixture()
 def employees():
-    new_employees = [
-        Employee(name='Rodrigo', id='123456'), Employee(name='Marta', id='654321')
+    employees = [
+        Employee(name='Rodrigo', id=123456), 
+        Employee(name='Marta', id=654321)
     ]
-    db.session.bulk_save_objects(new_employees)
+    db.session.bulk_save_objects(employees)
     db.session.commit()
     yield employees
     for employee in Employee.query.all():
         db.session.delete(employee)
     db.session.commit()
+
+@fixture(scope='module')
+def employee():
+    employee = Employee(name='Rodrigo', id=376176)
+    return employee

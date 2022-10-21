@@ -13,6 +13,9 @@
             </tr>
         </thead>
         <tbody>
+            {% if not employees %}
+                <h2>No registered employees</h2>
+            {% endif %}
             {% for employee in employees %}
             <tr>
                 <td>{{ employee.name }}</td>
