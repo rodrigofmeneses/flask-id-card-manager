@@ -9,10 +9,13 @@ class Employee(db.Model):
 
     def __str__(self) -> str:
         return self.name
-    
-    def serializer(self):
-        """Return object data in easily serializable format"""
-        return {
-            'id': self.id,
-            'name': self.name
-        }
+
+
+class Company(db.Model):
+    __tablename__ = 'companies'
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(140))
+
+    def __str__(self) -> str:
+        return self.name

@@ -1,0 +1,22 @@
+{% extends "template.html" %}
+{% block content %}
+    <h1>{{ title }}</h1>
+    {% if not companies %}
+        <h2>No registered companies</h2>
+    {% endif %}
+    <table class="table table-striped table-responsive table-bordered">
+        <thead class="thead-default">
+            <tr>
+                <th>Name</th>
+                <th>ID</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for company in companies %}
+            <tr>
+                <td>{{ company.name }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -12,3 +12,14 @@ class EmployeeForm(FlaskForm):
         [validators.DataRequired(), validators.length(min=1, max=140)]
     )
     save = SubmitField('Save')
+
+class CompanyForm(FlaskForm):
+    id = IntegerField(
+        'ID', 
+        [validators.DataRequired()]
+    )
+    name = StringField(
+        'Name',
+        [validators.DataRequired(), validators.length(min=1, max=140)]
+    )
+    save = SubmitField('Save')

@@ -1,6 +1,6 @@
 from app import create_app
 from app.ext.database import db
-from app.models import Employee
+from app.models import Employee, Company
 from dotenv import load_dotenv
 from pytest import fixture
 from splinter import Browser
@@ -30,4 +30,17 @@ def employees():
     yield employees
     for employee in Employee.query.all():
         db.session.delete(employee)
+    db.session.commit()
+
+@fixture()
+def companies():
+    companies = [
+        Company(name='UFC'), 
+        Company(name='UECE')
+    ]
+    db.session.bulk_save_objects(companies)
+    db.session.commit()
+    yield companies
+    for company in Company.query.all():
+        db.session.delete(company)
     db.session.commit()

@@ -9,12 +9,12 @@ employees = Blueprint('employees', __name__, template_folder='templates')
 @employees.get('/employees')
 def index():
     employees = Employee.query.all()
-    return render_template('list.html', title='Employees', employees=employees)
+    return render_template('employees.html', title='Employees', employees=employees)
 
 @employees.get('/employees/<int:id>')
 def detail(id):
     employee = Employee.query.filter_by(id=id).first()
-    return jsonify(employee.serializer())
+    return jsonify({'id':employee.id, 'name':employee.name})
 
 @employees.get('/employees/new')
 def new():
