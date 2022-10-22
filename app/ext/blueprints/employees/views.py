@@ -28,13 +28,15 @@ def create():
         return redirect(url_for('employees.new'))
     id = form.id.data
     name = form.name.data
-    try:
-        employee = Employee(id=id, name=name)
-    except:
-        flash('Employee already exist!')
-        return redirect(url_for('employees.index'))
+
+    if Employee.query.filter_by(id=id).first():
+        flash('Employee has exist')
+        return render_template('employees/employees_new.html', title='New Employee', form=form)
+
+    employee = Employee(id=id, name=name)
     db.session.add(employee)
     db.session.commit()
+
     return redirect(url_for('employees.index'))
 
 @employees.get('/employees/<int:id>/edit')
@@ -48,10 +50,15 @@ def edit(id):
 @employees.post('/employees/<int:id>/update')
 def update(id):
     form = EmployeeForm(request.form)
+
+    if Employee.query.filter_by(id=form.id.data).first():
+        flash('Employee has exist')
+        return render_template('employees/employees_edit.html', title='Edit Employee', id=request.form["current_id"], form=form)
+
     if form.validate_on_submit():
         employee = Employee.query.filter_by(id=request.form["current_id"]).first()
-        employee.name = form.name.data
         employee.id = form.id.data
+        employee.name = form.name.data
         db.session.add(employee)
         db.session.commit()
 

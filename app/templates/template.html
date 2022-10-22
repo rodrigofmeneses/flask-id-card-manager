@@ -7,6 +7,17 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap.css') }}">
   </head>
   <body>
+    <div class="container">
+      {% with messages = get_flashed_messages() %}
+          {% if messages %} 
+              <ul id="messages" class="list-unstyled">
+              {% for message in messages %}
+                  <li class="alert alert-success">{{ message }}</li>
+              {% endfor %}
+              </ul>
+          {% endif %}
+      {% endwith %}
+    </div>
     {% block content %} {% endblock %}
   </body>
 </html>
