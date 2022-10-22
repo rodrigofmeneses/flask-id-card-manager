@@ -32,10 +32,10 @@ def create():
         employee = Employee(id=id, name=name)
     except:
         flash('Employee already exist!')
-        return redirect(url_for('home.index'))
+        return redirect(url_for('employees.index'))
     db.session.add(employee)
     db.session.commit()
-    return redirect(url_for('home.index'))
+    return redirect(url_for('employees.index'))
 
 @employees.get('/employees/<int:id>/edit')
 def edit(id):
@@ -55,10 +55,10 @@ def update(id):
         db.session.add(employee)
         db.session.commit()
 
-    return redirect(url_for('home.index'))
+    return redirect(url_for('employees.index'))
 
 @employees.route('/employees/<id>/delete')
 def delete(id):
     Employee.query.filter_by(id=id).delete()
     db.session.commit()
-    return redirect(url_for('home.index'))
+    return redirect(url_for('employees.index'))

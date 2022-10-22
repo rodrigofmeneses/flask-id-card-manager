@@ -3,7 +3,7 @@ from flask import url_for
 
 class TestEmployeeCreate:
     def test_add_employee(self, browser):
-        browser.visit(url_for('home.index'))
+        browser.visit(url_for('employees.index'))
         browser.links.find_by_text('Add Employee').click()
         browser.fill('name', 'Rodrigo')
         browser.fill('id', '123456')
@@ -30,7 +30,7 @@ class TestEmployeeRead:
 
 class TestEmployeeUpdate:
     def test_edit_employee_page(self, browser, employees):
-        browser.visit(url_for('home.index'))
+        browser.visit(url_for('employees.index'))
 
         assert browser.is_text_present('Rodrigo')
         assert browser.is_text_present('123456') 
@@ -41,14 +41,14 @@ class TestEmployeeUpdate:
         browser.fill('id', '111111')
         browser.find_by_value('Save').click()
 
-        assert browser.url == url_for('home.index')
+        assert browser.url == url_for('employees.index')
         assert browser.is_text_present('Meneses')
         assert browser.is_text_present('111111') 
 
 
 class TestEmployeeDelete:
     def test_delete_employee(self, browser, employees):
-        browser.visit(url_for('home.index'))
+        browser.visit(url_for('employees.index'))
 
         assert browser.is_text_present('Rodrigo')
         assert browser.is_text_present('123456') 

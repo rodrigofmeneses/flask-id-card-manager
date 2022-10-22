@@ -1,20 +1,17 @@
 {% extends "template.html" %}
 {% block content %}
 <h1>{{ title }}</h1>
-<form action="{{ url_for('employees.create') }}" method="POST" enctype="multipart/form-data">
+<form action="{{ url_for('companies.update', id=id) }}" method="POST" enctype="multipart/form-data">
     <fieldset>
+        <input type="hidden" name="current_id" value="{{ id }}">
         {{ form.csrf_token() }}
-        <div class="form-group inputBox">
-            {{ form.id.label(class='form-label') }}
-            {{ form.id(class='form-control') }}
-        </div>
         <div class="form-group inputBox">
             {{ form.name.label(class='form-label') }}
             {{ form.name(class='form-control') }}
         </div>
         <div class="form-group buttons">
             {{ form.save(class='btn btn-primary') }}
-            <a class="btn btn-danger" href="{{ url_for('employees.index') }}">Back</a>
+            <a class="btn btn-danger" href="{{ url_for('companies.index') }}">Back</a>
         </div>
     </fieldset>
 </form>

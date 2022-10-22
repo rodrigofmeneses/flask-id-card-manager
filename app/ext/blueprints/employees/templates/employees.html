@@ -1,6 +1,8 @@
 {% extends "template.html" %}
 {% block content %}
     <h1>{{ title }}</h1>
+    <a class="btn btn-primary" href="{{ url_for('employees.new') }}">Add Employee</a>
+    <a class="btn btn-danger" href="{{ url_for('home.index') }}">Back</a>
     {% if not employees %}
         <h2>No registered employees</h2>
     {% endif %}
@@ -16,6 +18,10 @@
             <tr>
                 <td>{{ employee.name }}</td>
                 <td>{{ employee.id }}</td>
+                <td>
+                    <a class="btn btn-primary" href="{{ url_for('employees.edit', id=employee.id) }}">Edit</a>
+                    <a class="btn btn-primary" href="{{ url_for('employees.delete', id=employee.id) }}">Delete</a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
