@@ -8,7 +8,7 @@ companies = Blueprint('companies', __name__, template_folder='templates')
 @companies.get('/companies')
 def index():
     companies = Company.query.all()
-    return render_template('companies.html', title='Companies', companies=companies)
+    return render_template('companies/companies.html', title='Companies', companies=companies)
 
 @companies.get('/companies/<int:id>')
 def detail(id):
@@ -18,7 +18,7 @@ def detail(id):
 @companies.get('/companies/new')
 def new():
     form = CompanyForm()
-    return render_template('companies_new.html', title='New Company', form=form)
+    return render_template('companies/companies_new.html', title='New Company', form=form)
 
 @companies.post('/companies/create')
 def create():
@@ -40,7 +40,7 @@ def edit(id):
     form = CompanyForm()
     form.id.data = employee.id
     form.name.data = employee.name
-    return render_template('companies_edit.html', title='Edit Company', id=id, form=form)
+    return render_template('companies/companies_edit.html', title='Edit Company', id=id, form=form)
 
 @companies.post('/companies/<int:id>/update')
 def update(id):

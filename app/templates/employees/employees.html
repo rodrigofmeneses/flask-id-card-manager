@@ -20,7 +20,7 @@
                 <td>{{ employee.id }}</td>
                 <td>
                     <a class="btn btn-primary" href="{{ url_for('employees.edit', id=employee.id) }}">Edit</a>
-                    <a class="btn btn-primary" href="{{ url_for('employees.delete', id=employee.id) }}">Delete</a>
+                    <a class="btn btn-danger" href="{{ url_for('employees.delete', id=employee.id) }}">Delete</a>
                 </td>
             </tr>
             {% endfor %}

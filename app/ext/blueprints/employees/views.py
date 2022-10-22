@@ -9,7 +9,7 @@ employees = Blueprint('employees', __name__, template_folder='templates')
 @employees.get('/employees')
 def index():
     employees = Employee.query.all()
-    return render_template('employees.html', title='Employees', employees=employees)
+    return render_template('employees/employees.html', title='Employees', employees=employees)
 
 @employees.get('/employees/<int:id>')
 def detail(id):
@@ -19,7 +19,7 @@ def detail(id):
 @employees.get('/employees/new')
 def new():
     form = EmployeeForm()
-    return render_template('employees_new.html', title='New Employee', form=form)
+    return render_template('employees/employees_new.html', title='New Employee', form=form)
 
 @employees.post('/employees/create')
 def create():
@@ -43,7 +43,7 @@ def edit(id):
     form = EmployeeForm()
     form.id.data = employee.id
     form.name.data = employee.name
-    return render_template('employees_edit.html', title='Edit Employee', id=id, form=form)
+    return render_template('employees/employees_edit.html', title='Edit Employee', id=id, form=form)
 
 @employees.post('/employees/<int:id>/update')
 def update(id):
