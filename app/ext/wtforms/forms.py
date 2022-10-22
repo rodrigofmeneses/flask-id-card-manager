@@ -15,8 +15,7 @@ class EmployeeForm(FlaskForm):
 
 class CompanyForm(FlaskForm):
     id = IntegerField(
-        'ID', 
-        [validators.DataRequired()]
+        'ID'
     )
     name = StringField(
         'Name',

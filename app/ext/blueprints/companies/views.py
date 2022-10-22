@@ -13,17 +13,16 @@ def index():
 @companies.get('/companies/new')
 def new():
     form = CompanyForm()
-    return render_template('new.html', title='New Company', form=form)
+    return render_template('companies_new.html', title='New Company', form=form)
 
-@companies.get('/companies/create')
+@companies.post('/companies/create')
 def create():
     form = CompanyForm(request.form)
     if not form.validate_on_submit():
         return redirect(url_for('companies.new'))
-    id = form.id.data
     name = form.name.data
     try:
-        company = Company(id=id, name=name)
+        company = Company(name=name)
     except:
         return redirect(url_for('home.index'))
     db.session.add(company)

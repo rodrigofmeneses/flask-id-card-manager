@@ -19,7 +19,7 @@ def detail(id):
 @employees.get('/employees/new')
 def new():
     form = EmployeeForm()
-    return render_template('new.html', title='New Employee', form=form)
+    return render_template('employees_new.html', title='New Employee', form=form)
 
 @employees.post('/employees/create')
 def create():
@@ -43,7 +43,7 @@ def edit(id):
     form = EmployeeForm()
     form.id.data = employee.id
     form.name.data = employee.name
-    return render_template('edit.html', title='Edit Employee', id=id, form=form)
+    return render_template('employees_edit.html', title='Edit Employee', id=id, form=form)
 
 @employees.post('/employees/<int:id>/update')
 def update(id):
