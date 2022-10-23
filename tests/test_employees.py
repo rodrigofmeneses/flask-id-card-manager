@@ -3,16 +3,18 @@ from pytest import mark
 
 
 class TestEmployeeCreate:
-    def test_add_employee(self, browser, employees):
+    @mark.current
+    def test_add_employee(self, browser, employees, companies):
         browser.visit(url_for('employees.index'))
         browser.links.find_by_text('Add Employee').click()
         browser.fill('name', 'Meneses')
         browser.fill('id', '333333')
+        browser.select('companies', '1')
         browser.find_by_value('Save').click()
-        assert browser.is_text_present('Rodrigo')
-        assert browser.is_text_present('123456')
+        assert browser.is_text_present('Meneses')
+        assert browser.is_text_present('333333')
+        assert browser.is_text_present('UFC')
     
-    @mark.current
     def test_add_employee_with_same_id(self, browser, employees):
         browser.visit(url_for('employees.index'))
         browser.links.find_by_text('Add Employee').click()
@@ -32,7 +34,7 @@ class TestEmployeeRead:
         browser.visit(url_for('employees.index'))
         assert browser.is_text_present("Rodrigo")
         assert browser.is_text_present("Marta")
-    @mark.current
+
     def test_employee_detail_page(self, browser, employees):
         browser.visit(url_for('employees.detail', id=123456))
         assert browser.is_text_present("Rodrigo")

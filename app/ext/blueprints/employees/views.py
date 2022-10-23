@@ -1,6 +1,6 @@
 from flask import Blueprint, flash, jsonify, render_template, redirect, request, url_for
 from app.ext.wtforms.forms import EmployeeForm
-from app.models import Employee
+from app.models import Employee, Company
 from app.ext.database import db
 
 
@@ -23,17 +23,18 @@ def new():
 
 @employees.post('/employees/create')
 def create():
-    form = EmployeeForm(request.form)
+    form = EmployeeForm()
     if not form.validate_on_submit():
+        flash('Form not valid')
         return redirect(url_for('employees.new'))
     id = form.id.data
     name = form.name.data
+    company_id = form.companies.data
 
     if Employee.query.filter_by(id=id).first():
         flash('Employee has exist')
         return render_template('employees/employees_new.html', title='New Employee', form=form)
-
-    employee = Employee(id=id, name=name)
+    employee = Employee(id=id, name=name, company_id=company_id)
     db.session.add(employee)
     db.session.commit()
 
@@ -49,7 +50,7 @@ def edit(id):
 
 @employees.post('/employees/<int:id>/update')
 def update(id):
-    form = EmployeeForm(request.form)
+    form = EmployeeForm()
 
     if Employee.query.filter_by(id=form.id.data).first():
         flash('Employee has exist')

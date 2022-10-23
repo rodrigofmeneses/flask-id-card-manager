@@ -20,10 +20,10 @@ def browser():
         db.session.remove()
 
 @fixture()
-def employees():
+def employees(companies):
     employees = [
-        Employee(name='Rodrigo', id=123456), 
-        Employee(name='Marta', id=654321)
+        Employee(name='Rodrigo', id=123456, company_id=1), 
+        Employee(name='Marta', id=654321, company_id=2)
     ]
     db.session.bulk_save_objects(employees)
     db.session.commit()

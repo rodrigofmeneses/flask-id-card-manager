@@ -8,8 +8,8 @@
     <table class="table table-striped table-responsive table-bordered">
         <thead class="thead-default">
             <tr>
-                <th>Name</th>
                 <th>ID</th>
+                <th>Name</th>
             </tr>
         </thead>
         <tbody>
@@ -18,8 +18,8 @@
             {% endif %}
             {% for employee in employees %}
             <tr>
-                <td>{{ employee.name }}</td>
                 <td>{{ employee.id }}</td>
+                <td>{{ employee.name }}</td>
             </tr>
             {% endfor %}
         </tbody>

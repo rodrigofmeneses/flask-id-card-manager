@@ -1,5 +1,5 @@
 from app.ext.database import db
-from app.models import Employee
+from app.models import Employee, Company
 
 
 def create_db():
@@ -14,11 +14,18 @@ def drop_db():
 
 def populate_db():
     """Populate db with sample data"""
-    data = [
-        Employee(id='123456', name='Rodrigo'),
-        Employee(id='654321', name='Marta')
+    company_data = [
+        Company(name='UFC'),
+        Company(name='UECE'),
     ]
-    db.session.bulk_save_objects(data)
+    
+    employeer_data = [
+        Employee(id='1', name='Rodrigo', company_id=1),
+        Employee(id='2', name='Marta', company_id=1),
+        Employee(id='3', name='Liz', company_id=2)
+    ]
+    db.session.bulk_save_objects(company_data)
+    db.session.bulk_save_objects(employeer_data)
     db.session.commit()
     return Employee.query.all()
 
