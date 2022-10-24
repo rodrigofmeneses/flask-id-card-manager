@@ -1,9 +1,9 @@
 [default]
 SECRET_KEY = 'martalindamaravilhosa'
 EXTENSIONS = [
-    "app.ext.blueprints.home:init_app",
-    "app.ext.blueprints.employees:init_app",
-    "app.ext.blueprints.companies:init_app",
+    "app.ext.views.home:init_app",
+    "app.ext.views.employees:init_app",
+    "app.ext.views.companies:init_app",
     "app.ext.database:init_app",
     "app.ext.wtforms:init_app",
     "app.ext.commands:init_app"
@@ -14,7 +14,6 @@ SQLALCHEMY_DATABASE_URI = 'sqlite:///development.db'
 EXTENSIONS = [
     "dynaconf_merge_unique"  # to reuse extensions list from [default]
 ]
-TEMPLATES_AUTO_RELOAD = true
 
 [testing]
 SQLALCHEMY_DATABASE_URI = 'sqlite:///'

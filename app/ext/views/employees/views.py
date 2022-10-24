@@ -29,7 +29,11 @@ def create():
         return redirect(url_for('employees.new'))
     id = form.id.data
     name = form.name.data
-    company_id = form.companies.data
+    war_name = form.war_name.data
+    role = form.role.data
+    identification = form.identification.data
+    admission = form.admission.data
+    company_id = form.company.data
 
     if Employee.query.filter_by(id=id).first():
         flash('Employee has exist')

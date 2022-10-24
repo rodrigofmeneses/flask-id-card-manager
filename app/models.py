@@ -1,12 +1,18 @@
+from email.policy import default
 from app.ext.database import db
 
 
 class Employee(db.Model):
     __tablename__ = 'employees'
 
-    id = db.Column(db.Integer, primary_key=True, nullable=False)
-    name = db.Column(db.String(140), nullable=False)
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100))
+    war_name = db.Column(db.String(50))
+    role = db.Column(db.String(50))
+    identification = db.Column(db.String(13))
+    admission = db.Column(db.String(10))
     company_id = db.Column(db.Integer, db.ForeignKey("companies.id"), nullable=False)
+    for_print = db.Column(db.Boolean, default=False)
 
     def __str__(self) -> str:
         return self.name

@@ -1,7 +1,7 @@
 {% extends "template.html" %}
 {% block content %}
 <h1>{{ title }}</h1>
-<form action="{{ url_for('employees.create') }}" method="POST" enctype="multipart/form-data">
+<form class="formObjects" action="{{ url_for('employees.create') }}" method="POST" enctype="multipart/form-data">
     <fieldset>
         {{ form.csrf_token() }}
         <div class="form-group inputBox">
@@ -12,9 +12,25 @@
             {{ form.name.label(class='form-label') }}
             {{ form.name(class='form-control') }}
         </div>
+        <div class="form-group inputBox">
+            {{ form.war_name.label(class='form-label') }}
+            {{ form.war_name(class='form-control') }}
+        </div>
+        <div class="form-group inputBox">
+            {{ form.role.label(class='form-label') }}
+            {{ form.role(class='form-control') }}
+        </div>
+        <div class="form-group inputBox">
+            {{ form.identification.label(class='form-label') }}
+            {{ form.identification(class='form-control') }}
+        </div>
+        <div class="form-group inputBox">
+            {{ form.admission.label(class='form-label') }}
+            {{ form.admission(class='form-control') }}
+        </div>
         <div class="form-group">
-            {{ form.companies.label(class='form-label') }}
-            {{ form.companies(class='input-block') }}
+            {{ form.company.label(class='form-label') }}
+            {{ form.company(class='input-block') }}
         </div>
         <div class="form-group buttons">
             {{ form.save(class='btn btn-primary') }}
