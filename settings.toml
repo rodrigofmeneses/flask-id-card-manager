@@ -4,6 +4,7 @@ EXTENSIONS = [
     "app.ext.views.home:init_app",
     "app.ext.views.employees:init_app",
     "app.ext.views.companies:init_app",
+    "app.ext.views.checkout:init_app",
     "app.ext.database:init_app",
     "app.ext.wtforms:init_app",
     "app.ext.commands:init_app"

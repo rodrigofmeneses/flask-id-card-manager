@@ -1,4 +1,3 @@
-from email.policy import default
 from app.ext.database import db
 
 

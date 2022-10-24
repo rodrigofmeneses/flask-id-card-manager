@@ -1,7 +1,5 @@
 from flask import url_for
 
-from tests.conftest import browser
-
 
 def test_home_page_online(browser):
     browser.visit(url_for('home.index'))
@@ -14,7 +12,6 @@ def test_home_page_with_employees(browser, employees):
 
 def test_home_page_with_no_employees(browser):
     browser.visit(url_for('home.index'))
-    assert browser.is_text_present('ID Card Manager')
     assert browser.is_text_present('No registered employees')
 
 def test_button_to_employees(browser):

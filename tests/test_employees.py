@@ -3,7 +3,6 @@ from pytest import mark
 
 
 class TestEmployeeCreate:
-    @mark.current
     def test_add_employee(self, browser, employees, companies):
         browser.visit(url_for('employees.index'))
         browser.links.find_by_text('Add Employee').click()
