@@ -1,4 +1,4 @@
-from .views import employees
+from .employees_controller import employees
 
 
 def init_app(app):

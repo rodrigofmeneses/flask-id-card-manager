@@ -23,7 +23,7 @@ class Employee(db.Model):
 class Company(db.Model):
     __tablename__ = 'companies'
 
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(140), nullable=False)
     employ = db.orm.relationship("Employee", backref="company", uselist=True)
 

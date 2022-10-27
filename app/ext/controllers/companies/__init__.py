@@ -1,4 +1,4 @@
-from .views import companies
+from .companies_controller import companies
 
 
 def init_app(app):

@@ -1,4 +1,4 @@
-from .views import checkout
+from .checkout_controller import checkout
 
 
 def init_app(app):

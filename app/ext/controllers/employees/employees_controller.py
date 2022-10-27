@@ -38,7 +38,14 @@ def create():
     if Employee.query.filter_by(id=id).first():
         flash('Employee has exist')
         return render_template('employees/employees_new.html', title='New Employee', form=form)
-    employee = Employee(id=id, name=name, company_id=company_id)
+    employee = Employee(
+        id=id, 
+        name=name,
+        war_name=war_name,
+        role=role,
+        identification=identification,
+        admission=admission,
+        company_id=company_id)
     db.session.add(employee)
     db.session.commit()
 
@@ -50,20 +57,25 @@ def edit(id):
     form = EmployeeForm()
     form.id.data = employee.id
     form.name.data = employee.name
+    form.war_name.data = employee.war_name
+    form.role.data = employee.role
+    form.identification.data = employee.identification
+    form.admission.data = employee.admission
+    form.company.data = employee.company
     return render_template('employees/employees_edit.html', title='Edit Employee', id=id, form=form)
 
 @employees.post('/employees/<int:id>/update')
 def update(id):
     form = EmployeeForm()
-
-    if Employee.query.filter_by(id=form.id.data).first():
-        flash('Employee has exist')
-        return render_template('employees/employees_edit.html', title='Edit Employee', id=request.form["current_id"], form=form)
-
     if form.validate_on_submit():
-        employee = Employee.query.filter_by(id=request.form["current_id"]).first()
+        employee = Employee.query.get(id)
         employee.id = form.id.data
         employee.name = form.name.data
+        employee.war_name = form.war_name.data
+        employee.role = form.role.data
+        employee.identification = form.identification.data
+        employee.admission = form.admission.data
+        employee.company = Company.query.get(form.company.data)
         db.session.add(employee)
         db.session.commit()
 
