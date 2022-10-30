@@ -11,7 +11,7 @@ class Employee(db.Model):
     identification = db.Column(db.String(13))
     admission = db.Column(db.String(10))
     company_id = db.Column(db.Integer, db.ForeignKey("companies.id"), nullable=False)
-    for_print = db.Column(db.Boolean, default=False)
+    to_print = db.Column(db.Boolean, default=False)
 
     def __str__(self) -> str:
         return self.name

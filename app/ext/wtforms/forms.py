@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from app.models import Company
-from wtforms import StringField, IntegerField, SubmitField, SelectField, validators
+from wtforms import BooleanField, StringField, IntegerField, SubmitField, SelectField, validators
 
 
 class EmployeeForm(FlaskForm):
@@ -11,6 +11,7 @@ class EmployeeForm(FlaskForm):
     identification = StringField('Identification', [validators.DataRequired(), validators.length(min=1, max=13)])
     admission = StringField('Admission Date', [validators.DataRequired(), validators.length(min=1, max=10)])
     company = SelectField("Company", choices=[], coerce=int)
+    to_print = BooleanField('To Print')
     save = SubmitField('Save')
 
     def __init__(self):

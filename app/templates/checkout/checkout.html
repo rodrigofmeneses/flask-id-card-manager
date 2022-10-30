@@ -9,11 +9,7 @@
         <a class="btn btn-danger" href="{{ url_for('home.index') }}">Back</a>
     </div>
     <div>
-        <a class="btn btn-primary" href="#">Image Folder</a>
-        {% if not path %}
-            {% set path = 'No selected image folder' %}
-        {% endif %}
-        <label>{{ path }}</label>
+        <a class="btn btn-primary" href="#">Export files</a>
     </div>
     <table class="table table-striped table-responsive table-bordered">
         <thead class="thead-default">

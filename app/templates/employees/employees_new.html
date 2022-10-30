@@ -32,6 +32,10 @@
             {{ form.company.label(class='form-label') }}
             {{ form.company(class='input-block') }}
         </div>
+        <div class="form-group">
+            {{ form.to_print.label(class='form-label') }}
+            {{ form.to_print() }}
+        </div>
         <div class="form-group buttons">
             {{ form.save(class='btn btn-primary') }}
             <a class="btn btn-danger" href="{{ url_for('employees.index') }}">Back</a>

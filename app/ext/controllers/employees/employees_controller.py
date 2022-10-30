@@ -34,6 +34,7 @@ def create():
     identification = form.identification.data
     admission = form.admission.data
     company_id = form.company.data
+    to_print = form.to_print.data
 
     if Employee.query.filter_by(id=id).first():
         flash('Employee has exist')
@@ -45,7 +46,8 @@ def create():
         role=role,
         identification=identification,
         admission=admission,
-        company_id=company_id)
+        company_id=company_id,
+        to_print=to_print)
     db.session.add(employee)
     db.session.commit()
 
@@ -75,6 +77,7 @@ def update(id):
         employee.role = form.role.data
         employee.identification = form.identification.data
         employee.admission = form.admission.data
+        employee.to_print = form.to_print.data
         employee.company = Company.query.get(form.company.data)
         db.session.add(employee)
         db.session.commit()
