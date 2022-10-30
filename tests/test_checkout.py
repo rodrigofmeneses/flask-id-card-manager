@@ -11,7 +11,7 @@ def test_checkout_page_online(browser):
 def test_checkout_page_with_employees(browser, employees):
     browser.visit(url_for('checkout.index'))
     assert browser.is_text_present('Rodrigo')
-    assert browser.is_text_present('Marta')
+    assert not browser.is_text_present('Marta')
 
 def test_checkout_page_with_no_employees(browser):
     browser.visit(url_for('checkout.index'))

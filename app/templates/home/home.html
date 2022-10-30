@@ -12,17 +12,30 @@
                 <th>ID</th>
                 <th>Name</th>
                 <th>Company</th>
+                <th>To Print</th>
             </tr>
         </thead>
         <tbody>
             {% if not employees %}
-                <h2>No registered employees</h2>
+            <h2>No registered employees</h2>
             {% endif %}
             {% for employee in employees %}
-            <tr>
+            {% if employee.to_print %}
+            <tr style="background-color: lightgreen;">
+            {% else %}
+            <tr style="background-color: lightpink;">
+            {% endif %}
                 <td>{{ employee.id }}</td>
                 <td>{{ employee.name }}</td>
                 <td>{{ employee.company.name }}</td>
+                <td>
+                    {% if employee.to_print %}
+                    <a class="btn btn-danger" href="#">Cancel</a>
+                    {% else %}
+                    <a class="btn btn-success" href="#">Print</a>
+                    {% endif %}
+                </td>
+                
             </tr>
             {% endfor %}
         </tbody>

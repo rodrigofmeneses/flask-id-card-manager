@@ -22,7 +22,7 @@ def browser():
 @fixture()
 def employees(companies):
     employees = [
-        Employee(name='Rodrigo', id=123456, company_id=1), 
+        Employee(name='Rodrigo', id=123456, company_id=1, to_print=True), 
         Employee(name='Marta', id=654321, company_id=2)
     ]
     db.session.bulk_save_objects(employees)

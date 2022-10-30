@@ -1,4 +1,4 @@
-from flask import Blueprint, flash, jsonify, render_template, redirect, request, url_for
+from flask import Blueprint, flash, jsonify, render_template, redirect, url_for
 from app.ext.wtforms.forms import EmployeeForm
 from app.models import Employee, Company
 from app.ext.database import db
@@ -40,14 +40,15 @@ def create():
         flash('Employee has exist')
         return render_template('employees/employees_new.html', title='New Employee', form=form)
     employee = Employee(
-        id=id, 
-        name=name,
-        war_name=war_name,
-        role=role,
-        identification=identification,
-        admission=admission,
-        company_id=company_id,
-        to_print=to_print)
+            id=id, 
+            name=name,
+            war_name=war_name,
+            role=role,
+            identification=identification,
+            admission=admission,
+            company_id=company_id,
+            to_print=to_print
+        )
     db.session.add(employee)
     db.session.commit()
 
