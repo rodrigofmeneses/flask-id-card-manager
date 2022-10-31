@@ -20,9 +20,36 @@ def populate_db():
     ]
     
     employeer_data = [
-        Employee(id='1', name='Rodrigo', company_id=1, to_print=True),
-        Employee(id='2', name='Marta', company_id=1, to_print=False),
-        Employee(id='3', name='Liz', company_id=2, to_print=False)
+        Employee(
+            id='1', 
+            name='Rodrigo', 
+            war_name='Rodrigo Meneses', 
+            role='Analista',
+            identification='2000510231209',
+            admission='26/12/2021',
+            company_id=1, 
+            to_print=True
+        ),
+        Employee(
+            id='2', 
+            name='Marta',
+            war_name='Marta Saraiva', 
+            role='Processamento de dados',
+            identification='2000545321094',
+            admission='26/11/2021',
+            company_id=1, 
+            to_print=True
+        ),
+        Employee(
+            id='3', 
+            name='Liz',
+            war_name='Maria Liz', 
+            role='Contabilista',
+            identification='7845645321094',
+            admission='26/11/2010',
+            company_id=2, 
+            to_print=False
+        )
     ]
     db.session.bulk_save_objects(company_data)
     db.session.bulk_save_objects(employeer_data)
