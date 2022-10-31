@@ -65,6 +65,7 @@ def edit(id):
     form.identification.data = employee.identification
     form.admission.data = employee.admission
     form.company.data = employee.company
+    form.to_print.data = employee.to_print
     return render_template('employees/employees_edit.html', title='Edit Employee', id=id, form=form)
 
 @employees.post('/employees/<int:id>/update')
@@ -78,14 +79,14 @@ def update(id):
         employee.role = form.role.data
         employee.identification = form.identification.data
         employee.admission = form.admission.data
-        employee.to_print = form.to_print.data
         employee.company = Company.query.get(form.company.data)
+        employee.to_print = form.to_print.data
         db.session.add(employee)
         db.session.commit()
 
     return redirect(url_for('employees.index'))
 
-@employees.route('/employees/<id>/delete')
+@employees.route('/employees/<int:id>/delete')
 def delete(id):
     Employee.query.filter_by(id=id).delete()
     db.session.commit()

@@ -30,9 +30,9 @@
                 <td>{{ employee.company.name }}</td>
                 <td>
                     {% if employee.to_print %}
-                    <a class="btn btn-danger" href="#">Cancel</a>
+                    <a class="btn btn-danger" href="{{ url_for('home.switch_print', id=employee.id) }}">Cancel</a>
                     {% else %}
-                    <a class="btn btn-success" href="#">Print</a>
+                    <a class="btn btn-success" href="{{ url_for('home.switch_print', id=employee.id) }}">Print</a>
                     {% endif %}
                 </td>
                 

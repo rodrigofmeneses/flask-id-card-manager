@@ -23,7 +23,7 @@ def browser():
 def employees(companies):
     employees = [
         Employee(name='Rodrigo', id=123456, company_id=1, to_print=True), 
-        Employee(name='Marta', id=654321, company_id=2)
+        Employee(name='Marta', id=654321, company_id=2, to_print=False)
     ]
     db.session.bulk_save_objects(employees)
     db.session.commit()

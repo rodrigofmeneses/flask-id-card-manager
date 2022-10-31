@@ -1,4 +1,4 @@
-from .views import home
+from .home_controller import home
 
 
 def init_app(app):
