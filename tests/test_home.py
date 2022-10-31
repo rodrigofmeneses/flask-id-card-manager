@@ -30,7 +30,6 @@ def test_button_to_checkout(browser):
     browser.links.find_by_text('Checkout').click()
     assert browser.url == url_for('checkout.index')
 
-@mark.current
 def test_button_to_switch_print_state(browser, employees):
     browser.visit(url_for('home.index'))
     browser.links.find_by_text('Print').click()

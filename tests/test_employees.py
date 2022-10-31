@@ -18,14 +18,20 @@ class TestEmployeeCreate:
         assert browser.is_text_present('333333')
         assert browser.is_text_present('UFC')
     
+    @mark.current
     def test_add_employee_with_same_id(self, browser, employees):
         browser.visit(url_for('employees.index'))
         browser.links.find_by_text('Add Employee').click()
         browser.fill('id', '123456')
         browser.fill('name', 'Paulo')
+        browser.fill('war_name', 'Meneses')
+        browser.fill('role', 'Auxiliar')
+        browser.fill('identification', '123456789')
+        browser.fill('admission', '12/08/2021')
+        browser.select('company', '1')
         browser.find_by_value('Save').click()
-        assert browser.url == url_for('employees.new')
-        # assert browser.is_text_present('Employee has exist')
+        assert browser.url == url_for('employees.create')
+        assert browser.is_text_present('Employee has exist')
 
 
 class TestEmployeeRead:
