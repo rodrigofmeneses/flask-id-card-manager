@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from app.models import Company
+from app.models import Company, Employee
 from wtforms import BooleanField, StringField, IntegerField, SubmitField, SelectField, validators
 
 
@@ -19,6 +19,26 @@ class EmployeeForm(FlaskForm):
         self.company.choices = [
             (c.id, c.name) for c in Company.query.all()
         ]
+    
+    @property
+    def employee(self):
+        data = self.data
+        data['company_id'] = self.company.data
+        del data['save']
+        del data['company']
+        del data['csrf_token']
+        return data
+    
+    @employee.setter
+    def employee(self, employee: Employee):
+        self.id.data = employee.id
+        self.name.data = employee.name
+        self.war_name.data = employee.war_name
+        self.role.data = employee.role
+        self.identification.data = employee.identification
+        self.admission.data = employee.admission
+        self.company.data = employee.company
+        self.to_print.data = employee.to_print
 
 class CompanyForm(FlaskForm):
     id = IntegerField('ID')
