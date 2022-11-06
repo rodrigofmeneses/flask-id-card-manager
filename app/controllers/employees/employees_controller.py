@@ -1,7 +1,9 @@
-from flask import Blueprint, flash, jsonify, render_template, redirect, url_for
+from flask import Blueprint, flash, jsonify, render_template, redirect, url_for, request
 from app.ext.wtforms.forms import EmployeeForm
 from app.models import Employee, Company
 from app.ext.database import db
+
+from .utils import extract_employees
 
 
 employees = Blueprint('employees', __name__, template_folder='templates')
@@ -20,6 +22,23 @@ def detail(id):
 def new():
     form = EmployeeForm()
     return render_template('employees/employees_new.html', title='New Employee', form=form)
+
+@employees.post('/employees/new_file')
+def create_by_file():
+    file = request.files['file']
+    employees_data = extract_employees(file)
+
+    employees = [Employee(**e_d) for e_d in employees_data]
+
+    try:
+        db.session.bulk_save_objects(employees)
+        db.session.commit()
+        flash('Succefull added Employees')
+    except:
+        flash('Something Wrong - Invalid Data')
+    finally:
+        return redirect(url_for('employees.index'))
+
 
 @employees.post('/employees/create')
 def create():

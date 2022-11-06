@@ -1,0 +1,3 @@
+matricula;nome;nome_guerra;cargo;identidade;admissao;lotacao
+12346;ALEXANDRO ;Alexandro;Auxiliar Administrativo I;323233131;16/10/2020;UFC
+52325;ANTONIO;Sérgio;Magarefe;5454523;02/10/2015;UECE

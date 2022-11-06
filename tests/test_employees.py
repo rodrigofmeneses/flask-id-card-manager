@@ -18,7 +18,6 @@ class TestEmployeeCreate:
         assert browser.is_text_present('333333')
         assert browser.is_text_present('UFC')
     
-    @mark.current
     def test_add_employee_with_same_id(self, browser, employees):
         browser.visit(url_for('employees.index'))
         browser.links.find_by_text('Add Employee').click()
@@ -80,4 +79,3 @@ class TestEmployeeDelete:
         browser.links.find_by_text('Delete').click()
         assert browser.is_text_present('Rodrigo') == False
         assert browser.is_text_present('123456') == False
-

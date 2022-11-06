@@ -25,7 +25,7 @@ class Company(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(140), nullable=False)
-    employ = db.orm.relationship("Employee", backref="company", uselist=True)
+    employee = db.orm.relationship("Employee", backref="company", uselist=True)
 
     def __str__(self) -> str:
         return self.name
