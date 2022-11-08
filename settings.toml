@@ -11,14 +11,12 @@ EXTENSIONS = [
 ]
 
 [development]
-SQLALCHEMY_DATABASE_URI = 'sqlite:///development.db'
+# docker run -d -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres --mount source=postgres,target=/var/lib/postgresql/data --name postgres postgres
+# SQLALCHEMY_DATABASE_URI = 'sqlite:///development.db'
+SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:postgres@localhost/development'
 EXTENSIONS = [
     "dynaconf_merge_unique"  # to reuse extensions list from [default]
 ]
 
 [testing]
 SQLALCHEMY_DATABASE_URI = 'sqlite:///'
-
-[production]
-DEBUG = false
-SQLALCHEMY_DATABASE_URI = 'sqlite:///production.db'

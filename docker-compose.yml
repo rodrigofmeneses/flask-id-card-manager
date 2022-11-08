@@ -1,0 +1,32 @@
+version: '3.9'
+
+services:
+  web:
+    image: python:3.11
+    container_name: web
+    working_dir: /app
+    command: bash -c 'pip install -r requirements.txt && flask db upgrade && flask run -h 0.0.0.0'
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+    ports:
+      - :5000
+    networks:
+      - database-networks
+    depends_on:
+      - db
+  db:
+    image: postgres:latest
+    container_name: db
+    ports:
+      - 5432:5432
+    env_file:
+      - .env
+    networks:
+      - database-networks
+    restart: always
+  
+networks:
+  database-networks:
+    driver: bridge

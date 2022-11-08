@@ -63,14 +63,19 @@ def create():
 
 @employees.get('/employees/<int:id>/edit')
 def edit(id):
+    '''Edit Employee'''
     employee = Employee.query.filter_by(id=id).first()
+
     form = EmployeeForm()
     form.employee = employee
+
     return render_template('employees/employees_edit.html', title='Edit Employee', id=id, form=form)
 
 @employees.post('/employees/<int:id>/update')
 def update(id):
+    '''Process Edit route'''
     form = EmployeeForm()
+
     if form.validate_on_submit():
         Employee.query.filter_by(id=id).update(form.employee)
         db.session.commit()

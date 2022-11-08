@@ -6,7 +6,7 @@ from app.models import Company
 
 def extract_employees(file):
     match file.filename.split('.')[-1]:
-        case 'txt':
+        case 'txt' | 'csv':
             return from_text(file)
         case 'xlsx':
             return from_xlsx(file)
@@ -29,7 +29,6 @@ def from_text(file):
         employee_data['company_id'] = Company.query.filter_by(name=company).first().id
         
         employees.append(employee_data)
-
     return employees
 
 
