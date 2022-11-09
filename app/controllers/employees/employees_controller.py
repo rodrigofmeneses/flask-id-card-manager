@@ -1,9 +1,11 @@
-from flask import Blueprint, flash, jsonify, render_template, redirect, url_for, request
-from app.ext.wtforms.forms import EmployeeForm
-from app.models import Employee, Company
-from app.ext.database import db
+from flask import Blueprint, flash, render_template, redirect, url_for, request
+from sqlalchemy.exc import DataError
 
+from app.ext.wtforms.forms import EmployeeForm
+from app.models import Employee
+from app.ext.database import db
 from .utils import extract_employees
+
 
 
 employees = Blueprint('employees', __name__, template_folder='templates')
@@ -32,14 +34,14 @@ def create_by_file():
 
     employees_data = extract_employees(file)
 
-    employees = [Employee(**e_d) for e_d in employees_data]
-
     try:
+        employees = [Employee(**e_d) for e_d in employees_data]
         db.session.bulk_save_objects(employees)
         db.session.commit()
         flash('Succefull added Employees')
-    except:
-        flash('Something Wrong - Invalid Data')
+    except Exception as err:
+        flash(f'{err.orig.args}')
+        flash(f'Something Wrong - Invalid Data')
     finally:
         return redirect(url_for('employees.index'))
 

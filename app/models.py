@@ -1,5 +1,5 @@
 from app.ext.database import db
-
+from datetime import date
 
 class Employee(db.Model):
     __tablename__ = 'employees'
@@ -10,6 +10,7 @@ class Employee(db.Model):
     role = db.Column(db.String(50))
     identification = db.Column(db.String(13))
     admission = db.Column(db.String(10))
+    workplace = db.Column(db.String(50))
     company_id = db.Column(db.Integer, db.ForeignKey("companies.id"), nullable=False)
     to_print = db.Column(db.Boolean, default=True)
 
