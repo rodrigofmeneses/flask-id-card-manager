@@ -11,11 +11,10 @@ home = Blueprint('home', __name__, template_folder='templates')
 @home.get('/')
 def index():
     form = EmployeeForm()
-
     page = request.args.get('page', 1, type=int)
     employees = Employee.query.paginate(page=page, per_page=ROWS_PER_PAGE)
     # employees = Employee.query.all()
-    return render_template('home/home.html', title='ID Card Manager', employees=employees, form=form)
+    return render_template('home/home.html', title='ID Card Manager', employees=employees, form=form, pagination=True)
 
 @home.get('/<int:id>')
 def switch_print(id):

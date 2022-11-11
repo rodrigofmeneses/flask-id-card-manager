@@ -6,13 +6,17 @@ from app.models import Employee
 from app.ext.database import db
 from .utils import extract_employees
 
+ROWS_PER_PAGE = 10
 
 
 employees = Blueprint('employees', __name__, template_folder='templates')
 
 @employees.get('/employees')
 def index():
-    employees = Employee.query.all()
+    form = EmployeeForm()
+    page = request.args.get('page', 1, type=int)
+    employees = Employee.query.paginate(page=page, per_page=ROWS_PER_PAGE)
+    # employees = Employee.query.all()
     return render_template('employees/employees.html', title='Employees', employees=employees)
 
 @employees.get('/employees/<int:id>')

@@ -1,8 +1,11 @@
-from flask import Blueprint, flash, redirect, render_template, url_for
+from flask import Blueprint, flash, redirect, render_template, request, url_for
 from app.models import Employee
 from app.ext.database import db
 
 import csv
+
+ROWS_PER_PAGE = 15
+
 
 
 checkout = Blueprint('checkout', __name__, template_folder='templates')
@@ -10,7 +13,9 @@ checkout = Blueprint('checkout', __name__, template_folder='templates')
 @checkout.get('/checkout')
 def index():
     '''Show All employees to print.'''
-    employees = Employee.query.filter_by(to_print=True).all()
+    page = request.args.get('page', 1, type=int)
+    employees = Employee.query.filter_by(to_print=True).paginate(page=page, per_page=ROWS_PER_PAGE)
+    # employees = Employee.query.filter_by(to_print=True).all()
     return render_template('checkout/checkout.html', title='Checkout', employees=employees)
 
 @checkout.get('/checkout/export')
