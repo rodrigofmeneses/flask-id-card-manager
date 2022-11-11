@@ -61,7 +61,7 @@ def create():
         flash('Employee has exist')
         return render_template('employees/employees_new.html', title='New Employee', form=form)
     
-    employee = Employee(**form.employee_dict())
+    employee = Employee(**form.employee)
     db.session.add(employee)
     db.session.commit()
 

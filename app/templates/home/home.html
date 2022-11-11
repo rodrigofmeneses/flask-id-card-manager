@@ -49,7 +49,7 @@
         </a>
         <!-- Loop through the number of pages to display a link for each-->
         {% for page_num in employees.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
-        {% if page_num %}
+            {% if page_num %}
         <!-- Check for the active page and set the link to "Active"-->
                 {% if employees.page == page_num %}
                 <a href="{{ url_for('home.index', page=page_num) }}"
@@ -71,8 +71,8 @@
             {% if employees.page == employees.pages %}disabled{% endif %}">
             &raquo;
         </a>
-        </div>
-        <p style="position: absolute; right: 5%; bottom: 0;" class="mt-5">
+    </div>
+    <p style="position: absolute; right: 5%; bottom: 0;" class="mt-5">
         Showing page {{ employees.page }} of {{ employees.pages }}
-        </p>
+    </p>
 {% endblock %}
