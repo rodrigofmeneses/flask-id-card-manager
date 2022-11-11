@@ -19,7 +19,7 @@
             {% if not employees %}
             <h2>No registered employees</h2>
             {% endif %}
-            {% for employee in employees %}
+            {% for employee in employees.items %}
             {% if employee.to_print %}
             <tr style="background-color: lightgreen;">
             {% else %}
@@ -30,9 +30,9 @@
                 <td>{{ employee.company.name }}</td>
                 <td>
                     {% if employee.to_print %}
-                    <a class="btn btn-danger" href="{{ url_for('home.switch_print', id=employee.id) }}">Cancel</a>
+                    <a class="btn btn-danger" href="{{ url_for('home.switch_print', id=employee.id, page=employees.page) }}">Cancel</a>
                     {% else %}
-                    <a class="btn btn-success" href="{{ url_for('home.switch_print', id=employee.id) }}">Print</a>
+                    <a class="btn btn-success" href="{{ url_for('home.switch_print', id=employee.id, page=employees.page) }}">Print</a>
                     {% endif %}
                 </td>
                 
@@ -40,4 +40,39 @@
             {% endfor %}
         </tbody>
     </table>
+    <!-- <div style="position: absolute; right: 5%;"> -->
+    <div style="position:absolute; right: 5%;">
+        <a href="{{ url_for('home.index', page=employees.prev_num) }}"
+           class="btn btn-outline-dark 
+           {% if employees.page == 1 %}disabled{% endif %}">
+            &laquo;
+        </a>
+    <!-- Loop through the number of pages to display a link for each-->
+        {% for page_num in employees.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+    {% if page_num %}
+    <!-- Check for the active page and set the link to "Active"-->
+                {% if employees.page == page_num %}
+                <a href="{{ url_for('home.index', page=page_num) }}"
+                   class="btn btn-dark">
+                    {{ page_num }}
+                </a>
+                {% else %}
+                <a href="{{ url_for('home.index', page=page_num) }}"
+                   class="btn btn-outline-dark">
+                    {{ page_num }}
+                </a>
+                {% endif %}
+            {% else %}
+                ...
+            {% endif %}
+        {% endfor %}
+        <a href="{{ url_for('home.index', page=employees.next_num) }}"
+           class="btn btn-outline-dark 
+           {% if employees.page == employees.pages %}disabled{% endif %}">
+            &raquo;
+        </a>
+    </div>
+    <p style="position: absolute; right: 5%;" class="mt-5">
+       Showing page {{ employees.page }} of {{ employees.pages }}
+    </p>
 {% endblock %}
