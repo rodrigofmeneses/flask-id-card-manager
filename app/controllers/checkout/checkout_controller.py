@@ -1,4 +1,4 @@
-from flask import Blueprint, flash, redirect, render_template, request, send_file, url_for, Response
+from flask import Blueprint, render_template, request, send_file
 from app.models import Employee
 
 import csv
@@ -13,10 +13,12 @@ checkout = Blueprint('checkout', __name__, template_folder='templates')
 def index():
     '''Show All employees to print.'''
     page = request.args.get('page', 1, type=int)
-    employees = Employee.query.filter_by(to_print=True).paginate(page=page, per_page=ROWS_PER_PAGE)
+
+    query = Employee.query.filter_by(to_print=True).order_by(Employee.name)
+    employees = query.paginate(page=page, per_page=ROWS_PER_PAGE)
     return render_template('checkout/checkout.html', title='Checkout', employees=employees)
 
-@checkout.get('/checkout/download_front')
+@checkout.get('/checkout/download_front/')
 def download_front():
     employees = Employee.query.filter_by(to_print=True).all()
     
@@ -32,7 +34,7 @@ def download_front():
         as_attachment=True
     )
 
-@checkout.get('/checkout/download_back')
+@checkout.get('/checkout/download_back/')
 def download_back():
     employees = Employee.query.filter_by(to_print=True).all()
     
