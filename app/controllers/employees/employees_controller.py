@@ -4,7 +4,8 @@ from sqlalchemy.exc import DataError
 from app.ext.wtforms.forms import EmployeeForm
 from app.models import Employee
 from app.ext.database import db
-from .utils import extract_employees
+from app.controllers.employees.utils import extract_employees
+from app.controllers.utils import filter_by_name_or_id
 
 ROWS_PER_PAGE = 10
 
@@ -13,11 +14,15 @@ employees = Blueprint('employees', __name__, template_folder='templates')
 
 @employees.get('/employees')
 def index():
-    form = EmployeeForm()
     page = request.args.get('page', 1, type=int)
-    employees = Employee.query.paginate(page=page, per_page=ROWS_PER_PAGE)
-    # employees = Employee.query.all()
-    return render_template('employees/employees.html', title='Employees', employees=employees)
+    search = request.args.get('search')
+
+    query = Employee.query
+    if search:
+        query = filter_by_name_or_id(search)
+
+    employees = query.order_by(Employee.name).paginate(page=page, per_page=ROWS_PER_PAGE)
+    return render_template('employees/employees.html', title='Employees', employees=employees, search=search)
 
 @employees.get('/employees/<int:id>')
 def detail(id):
@@ -90,6 +95,10 @@ def update(id):
 
 @employees.route('/employees/<int:id>/delete')
 def delete(id):
+
+    page = request.args.get('page', 1, type=int)
+    search = request.args.get('search')
+
     Employee.query.filter_by(id=id).delete()
     db.session.commit()
-    return redirect(url_for('employees.index'))
+    return redirect(url_for('employees.index', page=page, search=search))

@@ -20,6 +20,7 @@ def index():
 
 @checkout.get('/checkout/download_front/')
 def download_front():
+    '''Create and download front file based on employees to print'''
     employees = Employee.query.filter_by(to_print=True).all()
     
     with open('app/tmp/front.csv', 'w', encoding='UTF8', newline='') as file:
@@ -36,6 +37,7 @@ def download_front():
 
 @checkout.get('/checkout/download_back/')
 def download_back():
+    '''Create and download back file based on employees to print'''
     employees = Employee.query.filter_by(to_print=True).all()
     
     with open('app/tmp/back.csv', 'w', encoding='UTF8', newline='') as file:

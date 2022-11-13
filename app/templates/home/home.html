@@ -30,9 +30,9 @@
                 <td>{{ employee.company.name }}</td>
                 <td>
                     {% if employee.to_print %}
-                    <a class="btn btn-danger" href="{{ url_for('home.switch_print', id=employee.id, page=employees.page) }}">Cancel</a>
+                    <a class="btn btn-danger" href="{{ url_for('home.switch_print', id=employee.id, page=employees.page, search=search) }}">Cancel</a>
                     {% else %}
-                    <a class="btn btn-success" href="{{ url_for('home.switch_print', id=employee.id, page=employees.page) }}">Print</a>
+                    <a class="btn btn-success" href="{{ url_for('home.switch_print', id=employee.id, page=employees.page, search=search) }}">Print</a>
                     {% endif %}
                 </td>
                 
@@ -42,7 +42,7 @@
     </table>
     
     <div style="position:absolute; right: 5%; bottom: 5%;">
-        <a href="{{ url_for('home.index', page=employees.prev_num) }}"
+        <a href="{{ url_for('home.index', page=employees.prev_num, search=search) }}"
             class="btn btn-outline-dark 
             {% if employees.page == 1 %}disabled{% endif %}">
             &laquo;
@@ -52,12 +52,12 @@
             {% if page_num %}
         <!-- Check for the active page and set the link to "Active"-->
                 {% if employees.page == page_num %}
-                <a href="{{ url_for('home.index', page=page_num) }}"
+                <a href="{{ url_for('home.index', page=page_num, search=search) }}"
                     class="btn btn-dark">
                     {{ page_num }}
                 </a>
                 {% else %}
-                <a href="{{ url_for('home.index', page=page_num) }}"
+                <a href="{{ url_for('home.index', page=page_num, search=search) }}"
                     class="btn btn-outline-dark">
                     {{ page_num }}
                 </a>
@@ -66,7 +66,7 @@
                 ...
             {% endif %}
         {% endfor %}
-        <a href="{{ url_for('home.index', page=employees.next_num) }}"
+        <a href="{{ url_for('home.index', page=employees.next_num, search=search) }}"
             class="btn btn-outline-dark 
             {% if employees.page == employees.pages %}disabled{% endif %}">
             &raquo;
