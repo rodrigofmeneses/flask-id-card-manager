@@ -13,11 +13,6 @@ def test_home_page_with_employees(browser, employees):
     assert browser.is_text_present("Marta")
 
 
-def test_home_page_with_no_employees(browser):
-    browser.visit(url_for("home.index"))
-    assert browser.is_text_present("No registered employees")
-
-
 def test_button_to_employees(browser):
     browser.visit(url_for("home.index"))
     browser.links.find_by_text("Employees").click()

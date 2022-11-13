@@ -2,7 +2,7 @@
 {% block content %}
     <h1>{{ title }}</h1>
     <div>
-        <a class="btn btn-primary" href="{{ url_for('companies.new') }}">Add Company</a>
+        <a class="btn btn-dark" href="{{ url_for('companies.new') }}">Add Company</a>
         <a class="btn btn-danger" href="{{ url_for('home.index') }}">Back</a>
     </div>
     {% if not companies %}
@@ -21,7 +21,7 @@
                 <td>{{ company.id }}</td>
                 <td>{{ company.name }}</td>
                 <td>
-                    <a class="btn btn-primary" href="{{ url_for('companies.edit', id=company.id) }}">Edit</a>
+                    <a class="btn btn-dark" href="{{ url_for('companies.edit', id=company.id) }}">Edit</a>
                     <a class="btn btn-danger" href="{{ url_for('companies.delete', id=company.id) }}">Delete</a>
                 </td>
             </tr>

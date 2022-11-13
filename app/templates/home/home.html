@@ -2,15 +2,16 @@
 {% block content %}
     <h1>{{ title }}</h1>
     <div>
-        <a class="btn btn-primary" href="{{ url_for('employees.index') }}">Employees</a>
-        <a class="btn btn-primary" href="{{ url_for('companies.index') }}">Companies</a>
-        <a class="btn btn-primary" href="{{ url_for('checkout.index') }}">Checkout</a>
+        <a class="btn btn-dark" href="{{ url_for('employees.index') }}">Employees</a>
+        <a class="btn btn-dark" href="{{ url_for('companies.index') }}">Companies</a>
+        <a class="btn btn-dark" href="{{ url_for('checkout.index') }}">Checkout</a>
+        <a class="btn btn-danger" href="{{ url_for('home.not_to_print') }}">Set all not to print</a>
     </div>
     <form method="GET" action="{{ url_for('home.index') }}">
         {{ form.csrf_token }}
         {{ form.search.label(class='h3', style='display: block') }}
         {{ form.search(class='form-control', style='display: inline-block; width: 30%') }}
-        <input class="btn btn-primary" type="submit" value="Search">
+        <input class="btn btn-dark" type="submit" value="Search">
     </form> 
     <table class="table table-striped table-responsive table-bordered">
         <thead class="thead-default">
@@ -41,7 +42,6 @@
                     <a class="btn btn-success" href="{{ url_for('home.switch_print', id=employee.id, page=employees.page, search=search) }}">Print</a>
                     {% endif %}
                 </td>
-                
             </tr>
             {% endfor %}
         </tbody>

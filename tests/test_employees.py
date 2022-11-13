@@ -34,10 +34,6 @@ class TestEmployeeCreate:
 
 
 class TestEmployeeRead:
-    def test_employees_page_with_no_employees(self, browser):
-        browser.visit(url_for("employees.index"))
-        assert browser.is_text_present("No registered employees")
-
     def test_employees_page_with_many_employees(self, browser, employees):
         browser.visit(url_for("employees.index"))
         assert browser.is_text_present("Rodrigo")
@@ -53,11 +49,11 @@ class TestEmployeeUpdate:
     def test_edit_employee_page(self, browser, employees):
         browser.visit(url_for("employees.index"))
 
-        assert browser.is_text_present("Rodrigo")
-        assert browser.is_text_present("123456")
+        assert browser.is_text_present("Marta")
+        assert browser.is_text_present("654321")
 
         browser.links.find_by_text("Edit").click()
-        assert browser.url == url_for("employees.edit", id=123456)
+        assert browser.url == url_for("employees.edit", id=654321)
         browser.fill("name", "Meneses")
         browser.fill("war_name", "Meneses")
         browser.fill("role", "Auxiliar")
@@ -74,9 +70,9 @@ class TestEmployeeDelete:
     def test_delete_employee(self, browser, employees):
         browser.visit(url_for("employees.index"))
 
-        assert browser.is_text_present("Rodrigo")
-        assert browser.is_text_present("123456")
+        assert browser.is_text_present("Marta")
+        assert browser.is_text_present("654321")
 
         browser.links.find_by_text("Delete").click()
-        assert browser.is_text_present("Rodrigo") == False
-        assert browser.is_text_present("123456") == False
+        assert browser.is_text_present("Marta") == False
+        assert browser.is_text_present("654321") == False

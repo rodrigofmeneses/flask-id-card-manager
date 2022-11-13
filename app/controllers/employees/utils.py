@@ -6,7 +6,7 @@ from app.models import Company
 
 def extract_employees(file):
     dataframe = load_workbook(file)
-    rows = dataframe.active.rows
+    rows = dataframe['Cards'].rows
 
     header = [cell.value for cell in next(rows)]
     employees = []
@@ -17,7 +17,6 @@ def extract_employees(file):
         try:
             employee["company_id"] = get_company_by_name(employee["company"]).id
             del employee["company"]
-            del employee[None]
         except Exception as err:
             flash(f"{err}")
             return redirect(url_for("employees.index"))

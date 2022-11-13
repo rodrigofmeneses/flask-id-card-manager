@@ -1,5 +1,4 @@
 from flask import url_for
-from pytest import mark
 
 
 def test_checkout_page_online(browser):
@@ -13,20 +12,3 @@ def test_checkout_page_with_employees(browser, employees):
     browser.visit(url_for("checkout.index"))
     assert browser.is_text_present("Rodrigo")
     assert not browser.is_text_present("Marta")
-
-
-def test_checkout_page_with_no_employees(browser):
-    browser.visit(url_for("checkout.index"))
-    assert browser.is_text_present("No employees to print")
-
-
-# @mark.current
-# def test_select_image_folder(browser):
-#     browser.visit(url_for('checkout.index'))
-#     assert browser.is_text_present('Image Folder')
-#     assert browser.is_text_present('No selected image folder')
-
-# def test_click_select_image_folder_text_change(browser):
-#     browser.visit(url_for('checkout.index'))
-#     browser.links.find_by_text('Image Folder')
-#     assert browser.is_text_present('/some_folder')

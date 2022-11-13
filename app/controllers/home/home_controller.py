@@ -31,8 +31,14 @@ def index():
         form=form,
     )
 
+@home.get('/not-to-print/')
+def not_to_print():
+    for employee in Employee.query.all():
+        employee.to_print = False
+    db.session.commit()
+    return redirect(url_for('home.index'))
 
-@home.get("/<int:id>")
+@home.get("/<int:id>/")
 def switch_print(id):
     page = request.args.get("page", 1, type=int)
     search = request.args.get("search", type=str)

@@ -4,7 +4,7 @@
 <form class="formObjects" action="{{ url_for('employees.create_by_file') }}" method="POST" enctype="multipart/form-data">
     {{ form.csrf_token() }}
     <input type="file" name="file" accept=".txt,.csv,.xlsx">
-    <input class="btn btn-primary" type="submit">
+    <input class="btn btn-dark" type="submit">
 </form> 
 <form class="formObjects" action="{{ url_for('employees.create') }}" method="POST" enctype="multipart/form-data">
     <fieldset>
@@ -42,7 +42,7 @@
             {{ form.to_print() }}
         </div>
         <div class="form-group buttons">
-            {{ form.save(class='btn btn-primary') }}
+            {{ form.save(class='btn btn-dark') }}
             <a class="btn btn-danger" href="{{ url_for('employees.index') }}">Back</a>
         </div>
     </fieldset>
