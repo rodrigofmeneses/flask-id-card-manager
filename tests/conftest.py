@@ -6,24 +6,26 @@ from pytest import fixture
 from splinter import Browser
 
 
-load_dotenv('.env.test')
+load_dotenv(".env.test")
 
-@fixture(scope='class')
+
+@fixture(scope="class")
 def browser():
     app = create_app(FORCE_ENV_FOR_DYNACONF="testing")
     context = app.test_request_context()
     context.push()
     with app.test_client():
         db.create_all()
-        yield Browser('flask', app=app)
+        yield Browser("flask", app=app)
         db.drop_all()
         db.session.remove()
+
 
 @fixture()
 def employees(companies):
     employees = [
-        Employee(name='Rodrigo', id=123456, company_id=1, to_print=True), 
-        Employee(name='Marta', id=654321, company_id=2, to_print=False)
+        Employee(name="Rodrigo", id=123456, company_id=1, to_print=True),
+        Employee(name="Marta", id=654321, company_id=2, to_print=False),
     ]
     db.session.bulk_save_objects(employees)
     db.session.commit()
@@ -32,12 +34,10 @@ def employees(companies):
         db.session.delete(employee)
     db.session.commit()
 
+
 @fixture()
 def companies():
-    companies = [
-        Company(name='UFC'), 
-        Company(name='UECE')
-    ]
+    companies = [Company(name="UFC"), Company(name="UECE")]
     db.session.bulk_save_objects(companies)
     db.session.commit()
     yield companies

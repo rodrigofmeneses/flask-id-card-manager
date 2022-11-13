@@ -6,6 +6,12 @@
         <a class="btn btn-primary" href="{{ url_for('companies.index') }}">Companies</a>
         <a class="btn btn-primary" href="{{ url_for('checkout.index') }}">Checkout</a>
     </div>
+    <form method="GET" action="{{ url_for('home.index') }}">
+        {{ form.csrf_token }}
+        {{ form.search.label(class='h3', style='display: block') }}
+        {{ form.search(class='form-control', style='display: inline-block; width: 30%') }}
+        <input class="btn btn-primary" type="submit" value="Search">
+    </form> 
     <table class="table table-striped table-responsive table-bordered">
         <thead class="thead-default">
             <tr>
