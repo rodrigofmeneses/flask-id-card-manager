@@ -1,17 +1,23 @@
+import os
 from app import create_app
 from app.ext.database import db
 from app.models import Employee, Company
-from dotenv import load_dotenv
 from pytest import fixture
 from splinter import Browser
+from dotenv import load_dotenv
 
-
-load_dotenv(".env.test")
+load_dotenv('.env.test')
 
 
 @fixture(scope="class")
 def browser():
-    app = create_app(FORCE_ENV_FOR_DYNACONF="testing")
+    app = create_app()
+    app.config.update(
+        TESTING = True,
+        DEBUG = os.getenv('FLASK_DEBUG'),
+        SQLALCHEMY_DATABASE_URI = os.getenv('FLASK_SQLALCHEMY_DATABASE_URI'),
+        SECRET_KEY = os.getenv('FLASK_SECRET_KEY')
+    )
     context = app.test_request_context()
     context.push()
     with app.test_client():
