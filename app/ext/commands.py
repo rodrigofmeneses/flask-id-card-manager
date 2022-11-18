@@ -27,10 +27,6 @@ def populate_db():
         Employee(
             id=i,
             name=fake.name(),
-            # war_name='Rodrigo Meneses',
-            # role='Analista',
-            # identification='2000510231209',
-            # admission='26/12/2021',
             company_id=choice([1, 2]),
             to_print=choice([True, False]),
         )
@@ -39,10 +35,14 @@ def populate_db():
     db.session.bulk_save_objects(company_data)
     db.session.bulk_save_objects(employeer_data)
     db.session.commit()
-    return Employee.query.all()
 
+def setup_db():
+    '''Setup Database. Create, drop and populate'''
+    drop_db
+    create_db()
+    populate_db()
 
 def init_app(app):
     # add multiple commands in a bulk
-    for command in [create_db, drop_db, populate_db]:
+    for command in [create_db, drop_db, populate_db, setup_db]:
         app.cli.add_command(app.cli.command()(command))
