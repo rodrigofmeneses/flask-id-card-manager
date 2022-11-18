@@ -3,7 +3,7 @@
 <h1>{{ title }}</h1>
 <form class="formObjects" action="{{ url_for('employees.create_by_file') }}" method="POST" enctype="multipart/form-data">
     {{ form.csrf_token() }}
-    <input type="file" name="file" accept=".txt,.csv,.xlsx">
+    <input type="file" name="file" accept=".xlsx">
     <input class="btn btn-dark" type="submit">
 </form> 
 <form class="formObjects" action="{{ url_for('employees.create') }}" method="POST" enctype="multipart/form-data">

@@ -38,7 +38,7 @@ def populate_db():
 
 def setup_db():
     '''Setup Database. Create, drop and populate'''
-    drop_db
+    drop_db()
     create_db()
     populate_db()
 
