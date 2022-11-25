@@ -5,7 +5,7 @@ Repositório de gerenciamento de funcionários com objetivo de armazenar e expor
 
 ## Variáveis de Ambiente
 
-Para rodas este projeto, voce precisará adicionar as seguintes variáveis de ambiente. As que usei estão disponíveis como referência, mas fique a vontade para modificar informações sensíveis.
+Para rodas este projeto, voce precisará adicionar as seguintes variáveis de ambiente. As que usei estão disponíveis como referência, mas fique a vontade para modificar informações sensíveis. Atenção na conexão de banco de dados!!! As que estão foram usadas para conexão com postgres + docker.
 
 <!-- To run this project, you will need to add the following environment variables to your .env file -->
 
@@ -76,7 +76,7 @@ Press CTRL+C to quit
 
 ## Rodando os testes
 
-Para rodas os testes, basta digitar `pytest` no terminal
+Para rodar os testes, basta digitar `pytest` no terminal
 
 ```bash
 $ pytest
@@ -91,4 +91,10 @@ tests/test_employees.py ......      [ 70%]
 tests/test_home.py ......           [100%]
 ```
 
-## Demo
+## Docker
+
+Atenção. Estou aprendendo a usar o docker, esse é meu primeiro projeto de teste.
+Para rodar localmente com o postgres é preciso primeiro criar o banco de dados. Por algum motivo não consigo fazer as migrações com o flask migrate, então antes de repetir os comandos até `flask db migrate`, foi necessário manualmente criar um banco de dados com o nome desejado, no meu caso foi id_card.
+
+Basicamente basta digitar o comando, `docker compose up`.
+Isso baixará as imagens do python e postgres, criará a rede e volumes necessárias para conectar o banco de dados e a aplicação e manter os arquivos salvos localmente caso o container seja excluido.
