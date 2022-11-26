@@ -11,7 +11,7 @@ services:
     volumes:
       - .:/app
     ports:
-      - :5000
+      - 58587:5000
     networks:
       - database-networks
     depends_on:
