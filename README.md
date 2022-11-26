@@ -5,7 +5,7 @@ Repositório de gerenciamento de funcionários com objetivo de armazenar e expor
 
 ## Variáveis de Ambiente
 
-Para rodas este projeto, voce precisará adicionar as seguintes variáveis de ambiente. As que usei estão disponíveis como referência, mas fique a vontade para modificar informações sensíveis. Atenção na conexão de banco de dados!!! As que estão foram usadas para conexão com postgres + docker.
+Para rodas este projeto, voce precisará adicionar as seguintes variáveis de ambiente. As que usei estão disponíveis como referência, mas fique a vontade para modificar informações sensíveis. Atenção na conexão de banco de dados!!! As que estão foram usadas tanto para desenvolvimento com sqlite quanto para conexão com postgres + docker.
 
 <!-- To run this project, you will need to add the following environment variables to your .env file -->
 
@@ -19,16 +19,16 @@ Para rodas este projeto, voce precisará adicionar as seguintes variáveis de am
 Clone o projeto e vá para o diretório
 
 ```
-$ git clone https://link-to-project
-$ cd flask-id-card-manager
+git clone https://github.com/rodrigofmeneses/flask-id-card-manager
+cd flask-id-card-manager
 ```
 
 Crie um ambiente virtual, ative-o
 
 ```
-$ python -m venv .venv
-$ source .venv/bin/activate # Linux
-$ .venv/Scripts/activate # Windows
+python -m venv .venv
+source .venv/bin/activate # Linux
+.venv/Scripts/activate # Windows
 ```
 
 Instale as dependências
@@ -39,9 +39,9 @@ Instale as dependências
 
 Faça as migrações no banco de dados
 ```
-$ flask db init
-$ flask db migrate
-$ flask db upgrade
+flask db init
+flask db migrate
+flask db upgrade
 ```
 
 Agora basta criar e popular o banco de dados. 
@@ -56,14 +56,13 @@ Uma pequena referência a comandos que criei (contidos no arquivo `app/ext/comma
 
 Para usar os comandos é necessário `flask` antes do comando:
 ```
-$ flask create-db
-$ flask setup-db # Se preferir o banco de dados com exemplos
+flask create-db
+flask setup-db # Se preferir o banco de dados com exemplos
 ```
 
-Rode o servidor de desenvolvimento
+Rode o servidor de desenvolvimento com `flask run`, a saída esperada é algo assim:
 
 ```bash
-$ flask run
 * Debug mode: on
 WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
  * Running on http://127.0.0.1:5000
@@ -76,10 +75,9 @@ Press CTRL+C to quit
 
 ## Rodando os testes
 
-Para rodar os testes, basta digitar `pytest` no terminal
+Para rodar os testes, basta digitar `pytest` no terminal:
 
 ```bash
-$ pytest
 platform linux -- Python 3.10.8, pytest-7.1.3, pluggy-1.0.0
 rootdir: /home/rfm/workspace/flask-id-card-manager
 plugins: Faker-15.3.1, cov-4.0.0
@@ -96,5 +94,5 @@ tests/test_home.py ......           [100%]
 Atenção. Estou aprendendo a usar o docker, esse é meu primeiro projeto de teste.
 Para rodar localmente com o postgres é preciso primeiro criar o banco de dados. Por algum motivo não consigo fazer as migrações com o flask migrate, então antes de repetir os comandos até `flask db migrate`, foi necessário manualmente criar um banco de dados com o nome desejado, no meu caso foi id_card.
 
-Basicamente basta digitar o comando, `docker compose up`.
+Basicamente, com o banco de dados criado basta digitar o comando, `docker-compose up`.
 Isso baixará as imagens do python e postgres, criará a rede e volumes necessárias para conectar o banco de dados e a aplicação e manter os arquivos salvos localmente caso o container seja excluido.
