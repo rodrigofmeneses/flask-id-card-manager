@@ -2,6 +2,7 @@ import csv
 from flask import Blueprint, render_template, request, send_file
 from app.models import Employee
 
+from datetime import datetime
 ROWS_PER_PAGE = 15
 
 
@@ -75,7 +76,12 @@ def file_front(employees) -> str:
 def file_back(employees) -> str:
     data = [["matricula", "nome", "identidade", "admissao"]]
     for employee in employees:
+        id = employee.identification
+        cpf = '{}.{}.{}-{}'.format(id[:3], id[3:6], id[6:9], id[9:])
+        date_time = datetime.fromisoformat(employee.admission)
+        date = date_time.strftime("%d/%m/%Y")
+
         data.append(
-            [employee.id, employee.name, employee.identification, employee.admission]
+            [employee.id, employee.name, cpf, date]
         )
     return data

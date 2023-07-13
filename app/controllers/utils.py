@@ -24,6 +24,7 @@ def extract_employees(file):
 
     for employee in employees:
         try:
+            employee["identification"] = employee["identification"].rjust(11, '0')
             employee["company_id"] = get_company_by_name(employee["company"]).id
             del employee["company"]
         except Exception as err:
